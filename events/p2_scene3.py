@@ -5,7 +5,7 @@ import time
 import math
 
 max_value = [0.5, 0.2, 0.3]
-prob_exp = ["Está muy soleado", "Está muy frío", "Tiene rocas pronunciadas"]
+prob = ["a", "b", "c"]
 actual = 0
 elapsed = 0.0
 start_time = 0.0
@@ -69,15 +69,15 @@ def draw(screen):
         else:
             text_x = robot.x - 300
 
-        font_size = 140
+        font_size = 200
     elif mode == "complete":
         text_x = robot.x - 300
 
-        font_size = 160 + 30 * math.sin(time.time() * 4)
+        font_size = 210 + 30 * math.sin(time.time() * 4)
     else:
         return  # no dibujar nada si otro modo
 
-    screen.draw.text(prob_exp[actual],
-                     center=(text_x, robot.y - 600),
+    screen.draw.text("P[" + prob[actual] + "] = " + f"{max_value[actual]:.1f}",
+                     center=(text_x, robot.y - 500),
                      fontsize=int(font_size),
                      color="white")

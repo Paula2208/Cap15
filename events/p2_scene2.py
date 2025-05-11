@@ -21,8 +21,6 @@ bgs = ["images/bg2.png", "images/bg3.png", "images/bg4.png"]
 bgs_e1 = ["bg2_e1", "bg3_e1", "bg4_e1"]
 bgs_e2 = ["bg2_e2", "bg3_e2", "bg4_e2"]
 prob = ["a", "b", "c"]
-prob_exp = ["Está muy soleado", "Está muy frío", "Tiene rocas pronunciadas"]
-elapse = 0.0
 
 bg2 = pygame.image.load(bgs[actual]).convert()
 bg2.set_alpha(180)
@@ -41,11 +39,10 @@ def init(switch_fn):
     number_value = 0.0
 
 def update(dt, keyboard):
-    global vibration_offset, vibration_dir, number_value, bg2, actual, mode, elapse
+    global vibration_offset, vibration_dir, number_value, bg2, actual, mode
     global start_time, animation_counter, current_image_index, animation_direction
     
     animation_counter += 1
-    elapse = time.time() - start_time
 
     if actual == 2 and robot.x >= WIDTH - 300:
         switch_scene(__import__('events.p1_scene5', fromlist=['scene5']))
@@ -58,6 +55,8 @@ def update(dt, keyboard):
         e2.x -= vibration_dir * 1
 
         if mode == "thinking":
+            if number_value <= max_value[actual]:
+                number_value += 0.005
 
             if animation_counter % 15 == 0:
                 current_image_index += animation_direction
@@ -68,7 +67,7 @@ def update(dt, keyboard):
 
                 robot.image = robot_images[current_image_index]
 
-            if elapse > 3:
+            if number_value > max_value[actual]:
                 mode = "walking"
         else:
             if robot.x < WIDTH - 300:
@@ -88,7 +87,6 @@ def update(dt, keyboard):
                 robot.x = 450
                 start_time = time.time()
                 number_value = 0.0
-                elapse = 0.0
                 actual += 1
                 bg2 = pygame.image.load(bgs[actual]).convert()
                 bg2.set_alpha(180)
@@ -100,4 +98,4 @@ def draw(screen):
     e1.draw()
     e2.draw()
     robot.draw()
-    screen.draw.text(prob_exp[actual], center=((WIDTH//3 )* 2 + 150, 250), fontsize=100, color="white")
+    screen.draw.text("P[" + prob[actual]+ "] = "+ f"{number_value:.1f}", center=((WIDTH//3 )* 2 + 150, 300), fontsize=200, color="white")
