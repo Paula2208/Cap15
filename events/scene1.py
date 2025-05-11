@@ -12,7 +12,7 @@ animation_direction = 1  # 1 for forward, -1 for backward
 switch_scene = None
 start_time = None
 mode = "walking"
-speed = 10
+speed = 3
 
 def init(switch_fn):
     global start_time, switch_scene
@@ -40,7 +40,7 @@ def update(dt, keyboard):
         mode = "surprised"
         start_time = time.time()
 
-    elif mode == "surprised" and time.time() - start_time > 1.5:
+    elif mode == "surprised" and time.time() - start_time > 2:
         switch_scene(__import__('events.scene2', fromlist=['scene2']))
 
 def draw(screen):

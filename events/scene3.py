@@ -29,7 +29,7 @@ def update(dt, keyboard):
     animation_counter += 1
     blink_counter += 1
 
-    if blink_counter % 30 == 0:  # Cambia visibilidad cada 30 frames (~0.5 seg)
+    if blink_counter % 30 == 0:
         show_error = not show_error
 
     if animation_counter % 5 == 0:
@@ -41,7 +41,7 @@ def update(dt, keyboard):
 
         robot.image = robot_images[current_image_index]
 
-    if mode == "2" and time.time() - start_time > 8:
+    if mode == "2" and time.time() - start_time > 4:
         switch_scene(__import__('events.scene4', fromlist=['scene4']))
 
 def draw(screen):

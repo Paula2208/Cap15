@@ -4,33 +4,49 @@ from events import scene1, scene2, scene3, scene4
 from config import WIDTH, HEIGHT
 import time
 
-# NO sé como ponerlo en pantalla completa :'v perdón
-
 WIDTH = WIDTH
 HEIGHT = HEIGHT
 TITLE = "Capítulo 15"
 FPS = 30 
 
-current_scene = scene1
+# Estado global del juego
+started = False
+current_scene = None
+
+def start_game():
+    global current_scene, started
+    scene1.init(switch_scene)
+    current_scene = scene1
+    started = True
 
 def update(dt):
     global current_scene
-    current_scene.update(dt, keyboard)
-    if keyboard.r:
-        current_scene = scene1
+    if started and current_scene:
+        current_scene.update(dt, keyboard)
 
 def draw():
-    current_scene.draw(screen)
+    screen.clear()
+    if not started:
+        screen.draw.text("Presiona S para comenzar", center=(WIDTH // 2, HEIGHT // 2), fontsize=50, color="white")
+        screen.draw.text("Presiona E para salir", center=(WIDTH // 2, HEIGHT // 2 + 60), fontsize=30, color="gray")
+    elif current_scene:
+        current_scene.draw(screen)
 
 def on_key_down(key):
-    if hasattr(current_scene, 'on_key_down'):
+    from pgzero.keyboard import keys
+    global current_scene
+    if key == keys.S and not started:
+        start_game()
+    elif key == keys.E:
+        exit()
+    elif started and hasattr(current_scene, 'on_key_down'):
         current_scene.on_key_down(key)
 
 def switch_scene(new_scene):
     global current_scene
+    new_scene.init(switch_scene)
     current_scene = new_scene
 
-# Pass the switch function to scenes so they can change scene
 scene1.init(switch_scene)
 scene2.init(switch_scene)
 scene3.init(switch_scene)
