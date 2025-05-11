@@ -15,12 +15,13 @@ number_value = 0.0
 animation_counter = 0
 current_image_index = 0
 animation_direction = 1
-speed = 5
+speed = 4
 max_value = [0.5, 0.2, 0.3]
 bgs = ["images/bg2.png", "images/bg3.png", "images/bg4.png"]
 bgs_e1 = ["bg2_e1", "bg3_e1", "bg4_e1"]
 bgs_e2 = ["bg2_e2", "bg3_e2", "bg4_e2"]
 prob = ["a", "b", "c"]
+prob_exp = ["Está muy soleado", "Está muy frío", "Tiene rocas pronunciadas"]
 
 bg2 = pygame.image.load(bgs[actual]).convert()
 bg2.set_alpha(180)
@@ -45,7 +46,7 @@ def update(dt, keyboard):
     animation_counter += 1
 
     if actual == 2 and robot.x >= WIDTH - 300:
-        switch_scene(__import__('events.p1_scene5', fromlist=['scene5']))
+        switch_scene(__import__('events.p2_scene3', fromlist=['scene3']))
     else:
         vibration_offset += vibration_dir
         if abs(vibration_offset) > 5:
@@ -56,7 +57,7 @@ def update(dt, keyboard):
 
         if mode == "thinking":
             if number_value <= max_value[actual]:
-                number_value += 0.005
+                number_value += 0.001
 
             if animation_counter % 15 == 0:
                 current_image_index += animation_direction
@@ -98,4 +99,6 @@ def draw(screen):
     e1.draw()
     e2.draw()
     robot.draw()
-    screen.draw.text("P[" + prob[actual]+ "] = "+ f"{number_value:.1f}", center=((WIDTH//3 )* 2 + 150, 300), fontsize=200, color="white")
+    screen.draw.text("P(RESULT(a)=s') = ∑P(s)P(s's,a)", center=(WIDTH//3 + 250, 90), fontsize=100, color="white")
+    screen.draw.text("P[" + prob[actual]+ "] = "+ f"{number_value:.1f}", center=((WIDTH//3 )* 2 + 150, 310), fontsize=200, color="white")
+    screen.draw.text("Camino "+ prob[actual]+ ": " + prob_exp[actual], (150, 260), fontsize=70, color="white")

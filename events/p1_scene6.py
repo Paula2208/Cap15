@@ -41,7 +41,7 @@ def update(dt, keyboard):
         start_time = time.time()
 
     elif mode == "surprised" and time.time() - start_time > 2:
-        exit()
+        switch_scene(__import__('events.p1_scene2', fromlist=['scene2']))
 
 def draw(screen):
     screen.blit("bg2", (0, 0))

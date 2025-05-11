@@ -3,7 +3,7 @@ from config import WIDTH, CENTER_ROBOT
 import time
 
 robot = Actor("rbackl", (WIDTH/2, CENTER_ROBOT + 100))
-globe = Actor("globe", (robot.x + 180, robot.y - 200))
+globe = Actor("globe", (robot.x - 300, robot.y - 600))
 
 background = "bg2"
 switch_scene = None
@@ -24,12 +24,10 @@ def update(dt, keyboard):
         if background == "bg2":
             background = "bg3"
             robot.image = "rbackr"
-            globe.pos = (robot.x - 180, robot.y - 200)
             start_time = time.time()
         elif background == "bg3":
             background = "bg4"
             robot.image = "rbackl"
-            globe.pos = (robot.x + 180, robot.y - 200)
             start_time = time.time()
         elif background == "bg4":
             switch_scene(__import__('events.p2_scene2', fromlist=['scene2']))
@@ -39,7 +37,7 @@ def draw(screen):
     robot.draw()
     globe.draw()
 
-    screen.draw.text("¿Y ahora qué hago?",
-                     center=(globe.x, globe.y - 10),
-                     fontsize=40,
+    screen.draw.text("¿Y ahora por dónde voy?",
+                     center=(globe.x, globe.y - 50),
+                     fontsize=60,
                      color="black")

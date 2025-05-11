@@ -17,7 +17,7 @@ robot_images = ["rtdone", "rtdonel", "rtdone", "rtdonel"]
 
 robot_ok = ["rok1", "rok2", "rok3", "rok4"]
 
-robot = Actor(robot_images[actual], (WIDTH // 2, CENTER_ROBOT))
+robot = Actor(robot_images[actual], (WIDTH // 2, CENTER_ROBOT + 130))
 mode = "thinking"
 switch_scene = None
 
@@ -37,7 +37,7 @@ def update(dt, keyboard):
 
     elapsed = time.time() - start_time
 
-    if mode == "thinking" and elapsed > 2:
+    if mode == "thinking" and elapsed > 3:
         if actual < 2:
             actual += 1
             robot.image = robot_images[actual]
@@ -56,14 +56,15 @@ def update(dt, keyboard):
                 animation_direction *= -1
             robot.image = robot_ok[current_image_index]
     
-    if elapsed > 3 and mode == "complete":
-        switch_scene(__import__('events.p1_scene6', fromlist=['scene6']))
+    if elapsed > 8 and mode == "complete":
+        switch_scene(__import__('events.p2_scene4', fromlist=['scene4']))
 
 def draw(screen):
     screen.surface.blit(bg1, (0, 0))
     robot.draw()
 
     if mode == "thinking":
+        screen.draw.text("EU(a) = ∑ P(Result(a) = s')U(s')", center=(WIDTH//3 + 270, 200), fontsize=150, color="white")
         if actual % 2 == 0:
             text_x = robot.x + 300
         else:
@@ -71,11 +72,13 @@ def draw(screen):
 
         font_size = 200
     elif mode == "complete":
+        screen.draw.text("MEU: action = argmaxEU(a)", center=(WIDTH//3 + 270, 200), fontsize=150, color="white")
+
         text_x = robot.x - 300
 
         font_size = 210 + 30 * math.sin(time.time() * 4)
     else:
-        return  # no dibujar nada si otro modo
+        return 
 
     screen.draw.text("P[" + prob[actual] + "] = " + f"{max_value[actual]:.1f}",
                      center=(text_x, robot.y - 500),
