@@ -12,7 +12,7 @@ animation_direction = 1  # 1 for forward, -1 for backward
 switch_scene = None
 start_time = None
 mode = "walking"
-speed = 3
+speed = 2
 
 def init(switch_fn):
     global start_time, switch_scene
@@ -41,8 +41,8 @@ def update(dt, keyboard):
         start_time = time.time()
 
     elif mode == "surprised" and time.time() - start_time > 2:
-        switch_scene(__import__('events.scene2', fromlist=['scene2']))
+        exit()
 
 def draw(screen):
-    screen.blit("bg1", (0, 0))
+    screen.blit("bg2", (0, 0))
     robot.draw()

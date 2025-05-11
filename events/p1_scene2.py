@@ -18,7 +18,7 @@ def update(dt, keyboard):
         mode = "2"
         start_time = time.time()
 
-    if time.time() - start_time >= 2 and mode == "2":
+    if time.time() - start_time >= 2.5 and mode == "2":
         if background == "bg2":
             background = "bg3"
             robot.image = "rbackr"
@@ -28,7 +28,7 @@ def update(dt, keyboard):
             robot.image = "rbackl"
             start_time = time.time()
         elif background == "bg4":
-            switch_scene(__import__('events.scene3', fromlist=['scene3']))
+            switch_scene(__import__('events.p1_scene3', fromlist=['scene3']))
 
 def draw(screen):
     screen.blit(background, (0, 0))

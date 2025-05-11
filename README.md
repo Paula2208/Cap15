@@ -1,11 +1,25 @@
 # Capítulo 15
 
+## Ejecución
+
+1. P1 - Introducción:
+
+```bash
+   pgzrun main.py
+```
+
+2. P2 - Subcapítulo 15.1:
+
+```bash
+   pgzrun main_p2.py
+```
+
 ## Requisitos
 
 - Python 3.8 o superior.
 - Librería PyGame Zero
 
-## Instalación y Ejecución
+## Instalación
 
 1. Clona el repositorio o descarga los archivos del proyecto.
 ```bash
@@ -16,12 +30,6 @@
 
 ```bash
    pip install pgzero
-```
-
-3. Ejecuta el archivo principal del juego:
-
-```bash
-   pgzrun main.py
 ```
 
 ## Crear un entorno virtual

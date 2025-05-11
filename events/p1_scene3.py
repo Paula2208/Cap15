@@ -41,12 +41,11 @@ def update(dt, keyboard):
 
         robot.image = robot_images[current_image_index]
 
-    if mode == "2" and time.time() - start_time > 4:
-        switch_scene(__import__('events.scene4', fromlist=['scene4']))
+    if mode == "2" and time.time() - start_time > 7:
+        switch_scene(__import__('events.p1_scene4', fromlist=['scene4']))
 
 def draw(screen):
     screen.blit(background, (0, 0))
     robot.draw()
-
     if show_error:
-        screen.draw.text("¡ERROR EN SISTEMA!", center=(WIDTH / 2, 100), fontsize=40, color="red", owidth=1.0, ocolor="black")
+        screen.draw.text("¡ERROR EN SISTEMA!", center=(WIDTH / 2, 100), fontsize=70, color="red", owidth=1.0, ocolor="black")
