@@ -13,7 +13,7 @@ animation_direction = 1  # 1 for forward, -1 for backward
 switch_scene = None
 start_time = None
 mode = "walking"
-speed = 5
+speed = 6
 
 def init(switch_fn):
     global start_time, switch_scene
@@ -24,7 +24,7 @@ def update(dt, keyboard):
     global current_image_index, animation_counter, animation_direction
     global start_time, mode
 
-    if robot.x < WIDTH - 300:
+    if robot.x < WIDTH + 300:
         robot.x += speed
         animation_counter += 1
         if animation_counter % 5 == 0:
@@ -36,7 +36,7 @@ def update(dt, keyboard):
 
             robot.image = robot_images[current_image_index]
     
-    if robot2.x < WIDTH - 300:
+    if robot2.x < WIDTH + 300:
         robot2.x += speed
         animation_counter += 1
         if animation_counter % 5 == 0:
@@ -48,17 +48,11 @@ def update(dt, keyboard):
 
             robot2.image = robot_images[current_image_index]
 
-    elif mode == "walking":
-        robot.image = "rsurprised"
-        robot2.image = "rsurprised"
-        mode = "surprised"
-        start_time = time.time()
-
-    elif mode == "surprised" and time.time() - start_time > 2:
-        switch_scene(__import__('events.p3_scene3', fromlist=['scene3']))
+    if robot2.x >= WIDTH + 300 and robot.x >= WIDTH + 300:
+        exit()
 
 def draw(screen):
-    screen.blit("bg1", (0, 0))
+    screen.blit("bg2", (0, 0))
     robot.draw()
     robot2.draw()
 
