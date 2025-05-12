@@ -1,6 +1,6 @@
 import pgzrun
 import pygame
-from events import p3_scene1#, p3_scene2, p3_scene3, p3_scene4, p3_scene5
+from events import p3_scene2#, p3_scene3, p3_scene4, p3_scene5
 from config import WIDTH, HEIGHT
 import time
 
@@ -15,8 +15,8 @@ current_scene = None
 
 def start_game():
     global current_scene, started
-    p3_scene1.init(switch_scene)
-    current_scene = p3_scene1
+    p3_scene2.init(switch_scene)
+    current_scene = p3_scene2
     started = True
 
 def update(dt):
@@ -48,8 +48,7 @@ def switch_scene(new_scene):
     new_scene.init(switch_scene)
     current_scene = new_scene
 
-p3_scene1.init(switch_scene)
-# p3_scene2.init(switch_scene)
+p3_scene2.init(switch_scene)
 # p3_scene3.init(switch_scene)
 # p3_scene4.init(switch_scene)
 # p3_scene5.init(switch_scene)
