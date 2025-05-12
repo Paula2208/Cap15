@@ -14,6 +14,18 @@
    pgzrun main_p2.py
 ```
 
+2. P3 - Subcapítulo 15.2:
+
+```bash
+   pgzrun main_p3.py
+```
+
+2. P3.2 - Subcapítulo 15.2 (Escena 21 -22):
+
+```bash
+   pgzrun main_p3_1.py
+```
+
 ## Requisitos
 
 - Python 3.8 o superior.
