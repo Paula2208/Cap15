@@ -1,6 +1,6 @@
 import pgzrun
 import pygame
-from events import p4_scene1, p4_scene2, p4_scene3#, p4_scene4, p4_scene5
+from events import p5_scene1#, p5_scene2, p5_scene3, p5_scene4, p5_scene5
 from config import WIDTH, HEIGHT
 import time
 
@@ -15,8 +15,8 @@ current_scene = None
 
 def start_game():
     global current_scene, started
-    p4_scene1.init(switch_scene)
-    current_scene = p4_scene1
+    p5_scene3.init(switch_scene)
+    current_scene = p5_scene3
     started = True
 
 def update(dt):
@@ -27,7 +27,7 @@ def update(dt):
 def draw():
     screen.clear()
     if not started:
-        screen.draw.text("Parte 4", center=(WIDTH // 2, HEIGHT // 2 - 400), fontsize=50, color="white")
+        screen.draw.text("Parte 5", center=(WIDTH // 2, HEIGHT // 2 - 400), fontsize=50, color="white")
         screen.draw.text("Presiona S para comenzar", center=(WIDTH // 2, HEIGHT // 2), fontsize=50, color="white")
         screen.draw.text("Presiona E para salir", center=(WIDTH // 2, HEIGHT // 2 + 60), fontsize=30, color="gray")
     elif current_scene:
@@ -48,10 +48,10 @@ def switch_scene(new_scene):
     new_scene.init(switch_scene)
     current_scene = new_scene
 
-p4_scene1.init(switch_scene)
-p4_scene2.init(switch_scene)
-p4_scene3.init(switch_scene)
-# p4_scene4.init(switch_scene)
-# p4_scene5.init(switch_scene)
+p5_scene1.init(switch_scene)
+p5_scene2.init(switch_scene)
+p5_scene3.init(switch_scene)
+# p5_scene4.init(switch_scene)
+# p5_scene5.init(switch_scene)
 
 pgzrun.go()
